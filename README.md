@@ -29,7 +29,7 @@ python ./scripts/flist.py --path path_to_places2_traininit_set --output ./datase
 ```
 
 ## Getting Started
-Download the pre-trained models using the following links.
+Download the pre-trained models using the following links and copy them under `./checkpoints` directory.
 
 [Places2](https://drive.google.com/drive/folders/1KyXz4W4SAvfsGh3NJ7XgdOv5t46o-8aa) | [CelebA](https://drive.google.com/drive/folders/1nkLOhzWL-w2euo0U6amhz7HVzqNC5rqb) | [Paris-StreetView](https://drive.google.com/drive/folders/1cGwDaZqDcqYU7kDuEbMXa9TP3uDJRBR1)
 
@@ -39,8 +39,25 @@ bash ./scripts/download_model.sh
 ```
 
 ### Training
+To train the model, create a `config.yaml` file similar to the [example config file](https://github.com/knazeri/edge-connect/blob/master/config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
+
+EdgeConnect is trained in three stages: 1) training the edge model, 2) training the inpaint model and 3) training the joint model. To train the model:
+```bash
+python train.py --model [stage] --checkpoints [path to checkpoints]
+```
+
+For example to train the edge model on Places2 dataset under `./checkpoints/places2` directory:
+```bash
+python train.py --model 1 --checkpoints ./checkpoints/places2
+```
+
+Convergence of the model differs from dataset to dataset. For example Places2 dataset converges in one of two epochs, while smaller datasets like CelebA require almost 40 epochs to converge. You can set the number of training iterations by changing `MAX_ITERS` value in the configuration file.
+
 
 ### Test
+To test the model, create a `config.yaml` file similar to the [example config file](https://github.com/knazeri/edge-connect/blob/master/config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
+
+### Model Configuration
 
 ## License
 Licensed under a [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/).
