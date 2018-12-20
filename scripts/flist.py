@@ -4,7 +4,7 @@ import numpy as np
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--path', type=str, help='path to the dataset')
-parser.add_argument('--name', type=str, help='name of the file list')
+parser.add_argument('--output', type=str, help='path to the file list')
 args = parser.parse_args()
 
 ext = {'.jpg', '.png'}
@@ -17,4 +17,4 @@ for root, dirs, files in os.walk(args.path):
             images.append(os.path.join(root, file))
 
 images = sorted(images)
-np.savetxt(args.name, images, fmt='%s')
+np.savetxt(args.output, images, fmt='%s')
