@@ -1,4 +1,7 @@
 ## EdgeConnect: Generative Image Inpainting with Adversarial Edge Learning
+<p align='center'>  
+  <img src='https://user-images.githubusercontent.com/1743048/50255605-916db100-03c0-11e9-8baa-6af87c2d86a9.png' width='870'/>
+</p>
 
 ## Prerequisites
 - Python 3
