@@ -29,6 +29,16 @@ python ./scripts/flist.py --path path_to_places2_traininit_set --output ./datase
 ```
 
 ## Getting Started
+Download the pre-trained models using the following links.
+
+[Places2](https://drive.google.com/drive/folders/1KyXz4W4SAvfsGh3NJ7XgdOv5t46o-8aa) | [CelebA](https://drive.google.com/drive/folders/1nkLOhzWL-w2euo0U6amhz7HVzqNC5rqb) | [Paris-StreetView](https://drive.google.com/drive/folders/1cGwDaZqDcqYU7kDuEbMXa9TP3uDJRBR1)
+
+Alternatively, you can run the following script to download the models:
+```bash
+bash ./scripts/download_model.sh
+```
+
+### Training
 ### Training
 
 ### Test
