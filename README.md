@@ -33,12 +33,11 @@ Download the pre-trained models using the following links.
 
 [Places2](https://drive.google.com/drive/folders/1KyXz4W4SAvfsGh3NJ7XgdOv5t46o-8aa) | [CelebA](https://drive.google.com/drive/folders/1nkLOhzWL-w2euo0U6amhz7HVzqNC5rqb) | [Paris-StreetView](https://drive.google.com/drive/folders/1cGwDaZqDcqYU7kDuEbMXa9TP3uDJRBR1)
 
-Alternatively, you can run the following script to download the models:
+Alternatively, you can run the following script to automatically download the pre-trained models:
 ```bash
 bash ./scripts/download_model.sh
 ```
 
-### Training
 ### Training
 
 ### Test
