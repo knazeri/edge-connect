@@ -21,7 +21,10 @@ pip install -r requirements.txt
 ```
 
 ## Datasets
-- We use [Places2](http://places2.csail.mit.edu), [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) and [Paris Street-View](https://github.com/pathak22/context-encoder) datasets. To train a model on the full dataset, download datasets from official websites.
+We use [Places2](http://places2.csail.mit.edu), [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) and [Paris Street-View](https://github.com/pathak22/context-encoder) datasets. To train a model on the full dataset, download datasets from official websites.
+
+Our model is trained on the irregular mask dataset provided by [Liu et al.](https://arxiv.org/abs/1804.07723). You can download publically available train/test mask dataset from [their website](http://masc.cs.gmu.edu/wiki/partialconv).
+
 After downloading, run `scripts/flist.py` to generate train, test and validation set file lists. For example, to generate the training set file list on Places2 dataset run:
 ```bash
 mkdir datasets
@@ -57,6 +60,7 @@ Convergence of the model differs from dataset to dataset. For example Places2 da
 ### Test
 To test the model, create a `config.yaml` file similar to the [example config file](https://github.com/knazeri/edge-connect/blob/master/config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
 
+http://masc.cs.gmu.edu/wiki/partialconv
 ### Model Configuration
 
 ## License
