@@ -13,13 +13,13 @@ class EdgeInpaintingModel():
     def __init__(self, config):
         self.config = config
 
-        if config.MODEL == 0:
+        if config.MODEL == 1:
             model_name = 'edge'
-        elif config.MODEL == 1:
-            model_name = 'inpaint'
         elif config.MODEL == 2:
-            model_name = 'edge_inpaint'
+            model_name = 'inpaint'
         elif config.MODEL == 3:
+            model_name = 'edge_inpaint'
+        elif config.MODEL == 4:
             model_name = 'joint'
 
         self.debug = False
@@ -31,7 +31,7 @@ class EdgeInpaintingModel():
         self.edgeacc = EdgeAccuracy(config.EDGE_THRESHOLD).to(config.DEVICE)
 
         # test mode
-        if self.config.MODE == 1:
+        if self.config.MODE == 2:
             self.test_dataset = Dataset(config, config.TEST_FLIST, config.TEST_EDGE_FLIST, config.TEST_MASK_FLIST, augment=False, training=False)
         else:
             self.train_dataset = Dataset(config, config.TRAIN_FLIST, config.TRAIN_EDGE_FLIST, config.TRAIN_MASK_FLIST, augment=True, training=True)
@@ -50,10 +50,10 @@ class EdgeInpaintingModel():
         self.log_file = os.path.join(config.PATH, 'log_' + model_name + '.dat')
 
     def load(self):
-        if self.config.MODEL == 0:
+        if self.config.MODEL == 1:
             self.edge_model.load()
 
-        elif self.config.MODEL == 1:
+        elif self.config.MODEL == 2:
             self.inpaint_model.load()
 
         else:
@@ -61,10 +61,10 @@ class EdgeInpaintingModel():
             self.inpaint_model.load()
 
     def save(self):
-        if self.config.MODEL == 0:
+        if self.config.MODEL == 1:
             self.edge_model.save()
 
-        elif self.config.MODEL == 1 or self.config.MODEL == 2:
+        elif self.config.MODEL == 2 or self.config.MODEL == 3:
             self.inpaint_model.save()
 
         else:
@@ -92,13 +92,13 @@ class EdgeInpaintingModel():
 
             self.edge_model.train()
             self.inpaint_model.train()
-            progbar = Progbar(total, width=20, stateful_metrics=['epoc', 'it'])
+            progbar = Progbar(total, width=20, stateful_metrics=['epoch', 'iter'])
 
             for items in train_loader:
                 images, images_gray, edges, masks = self.cuda(*items)
 
                 # edge model
-                if model == 0:
+                if model == 1:
                     # train
                     outputs, gen_loss, dis_loss, logs = self.edge_model.process(images_gray, edges, masks)
 
@@ -113,7 +113,7 @@ class EdgeInpaintingModel():
 
 
                 # inpaint model
-                elif model == 1:
+                elif model == 2:
                     # train
                     outputs, gen_loss, dis_loss, logs = self.inpaint_model.process(images, edges, masks)
                     outputs_merged = (outputs * masks) + (images * (1 - masks))
@@ -130,9 +130,9 @@ class EdgeInpaintingModel():
 
 
                 # inpaint with edge model
-                elif model == 2 or model == 4:
+                elif model == 3:
                     # train
-                    if model == 2 or np.random.binomial(1, 0.5) > 0:
+                    if True or np.random.binomial(1, 0.5) > 0:
                         outputs = self.edge_model(images_gray, edges, masks)
                         outputs = outputs * masks + edges * (1 - masks)
                     else:
@@ -181,8 +181,8 @@ class EdgeInpaintingModel():
                     break
 
                 logs = [
-                    ("epoc", epoch),
-                    ("it", iteration),
+                    ("epoch", epoch),
+                    ("iter", iteration),
                 ] + logs
 
                 progbar.add(len(images), values=logs)
@@ -228,7 +228,7 @@ class EdgeInpaintingModel():
             images, images_gray, edges, masks = self.cuda(*items)
 
             # edge model
-            if model == 0:
+            if model == 1:
                 # eval
                 outputs, gen_loss, dis_loss, logs = self.edge_model.process(images_gray, edges, masks)
 
@@ -239,7 +239,7 @@ class EdgeInpaintingModel():
 
 
             # inpaint model
-            elif model == 1:
+            elif model == 2:
                 # eval
                 outputs, gen_loss, dis_loss, logs = self.inpaint_model.process(images, edges, masks)
                 outputs_merged = (outputs * masks) + (images * (1 - masks))
@@ -252,7 +252,7 @@ class EdgeInpaintingModel():
 
 
             # inpaint with edge model
-            elif model == 2 or model == 4:
+            elif model == 3:
                 # eval
                 outputs = self.edge_model(images_gray, edges, masks)
                 outputs = outputs * masks + edges * (1 - masks)
@@ -308,12 +308,12 @@ class EdgeInpaintingModel():
             index += 1
 
             # edge model
-            if model == 0:
+            if model == 1:
                 outputs = self.edge_model(images_gray, edges, masks)
                 outputs_merged = (outputs * masks) + (edges * (1 - masks))
 
             # inpaint model
-            elif model == 1:
+            elif model == 2:
                 outputs = self.inpaint_model(images, edges, masks)
                 outputs_merged = (outputs * masks) + (images * (1 - masks))
 
@@ -348,14 +348,14 @@ class EdgeInpaintingModel():
         images, images_gray, edges, masks = self.cuda(*items)
 
         # edge model
-        if model == 0:
+        if model == 1:
             iteration = self.edge_model.iteration
             inputs = (images_gray * (1 - masks)) + masks
             outputs = self.edge_model(images_gray, edges, masks)
             outputs_merged = (outputs * masks) + (edges * (1 - masks))
 
         # inpaint model
-        elif model == 1:
+        elif model == 2:
             iteration = self.inpaint_model.iteration
             inputs = (images * (1 - masks)) + masks
             outputs = self.inpaint_model(images, edges, masks)

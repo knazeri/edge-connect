@@ -1,2 +1,2 @@
 from main import main
-main(mode=0)
+main(mode=1)

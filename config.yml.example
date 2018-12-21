@@ -1,7 +1,7 @@
-MODE: 0             # 0: train, 1: test, 2: eval
-MODEL: 0            # 0: edge model, 1: inpaint model, 2: edge-inpaint model, 3: joint model
-MASK: 3             # 0: random block, 1: half, 2: external, 3: (external, random block), 4: (external, random block, half)
-EDGE: 0             # 0: canny, 1: external
+MODE: 1             # 1: train, 2: test, 3: eval
+MODEL: 1            # 1: edge model, 2: inpaint model, 3: edge-inpaint model, 4: joint model
+MASK: 3             # 1: random block, 2: half, 3: external, 4: (external, random block), 5: (external, random block, half)
+EDGE: 1             # 1: canny, 2: external
 NMS: 1              # 0: no non-max-suppression, 1: applies non-max-suppression on the external edges by multiplying by Canny
 SEED: 10            # random seed
 GPU: [0]            # list of gpu ids
@@ -38,8 +38,8 @@ INPAINT_ADV_LOSS_WEIGHT: 0.01 # adversarial loss weight
 GAN_LOSS: nsgan               # nsgan | lsgan | hinge
 GAN_POOL_SIZE: 0              # fake images pool size
 
-SAVE_INTERVAL: 1000           # how many batches to wait before saving model (0: never)
-SAMPLE_INTERVAL: 1000         # how many batches to wait before sampling (0: never)
+SAVE_INTERVAL: 1000           # how many iterations to wait before saving model (0: never)
+SAMPLE_INTERVAL: 1000         # how many iterations to wait before sampling (0: never)
 SAMPLE_SIZE: 12               # number of images to sample
 EVAL_INTERVAL: 0              # how many iterations to wait before model evaluation (0: never)
 LOG_INTERVAL: 10              # how many iterations to wait before logging training status (0: never)

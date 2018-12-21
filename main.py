@@ -13,7 +13,7 @@ def main(mode=None):
     r"""starts the model
 
     Args:
-        mode (int): 0: train, 1: test, 2: eval, reads from config file if not specified
+        mode (int): 1: train, 2: test, 3: eval, reads from config file if not specified
     """
 
     config = load_config(mode)
@@ -41,13 +41,13 @@ def main(mode=None):
 
 
     # model training
-    if config.MODE == 0:
+    if config.MODE == 1:
         config.print()
         print('\nstart training...\n')
         model.train()
 
     # model test
-    elif config.MODE == 1:
+    elif config.MODE == 2:
         print('\nstart testing...\n')
         model.test()
 
@@ -61,7 +61,7 @@ def load_config(mode=None):
     r"""loads model config 
 
     Args:
-        mode (int): 0: train, 1: test, 2: eval, reads from config file if not specified
+        mode (int): 1: train, 2: test, 3: eval, reads from config file if not specified
     """
 
     parser = argparse.ArgumentParser()
@@ -90,14 +90,14 @@ def load_config(mode=None):
     config = Config(config_path)
 
     # train mode
-    if mode == 0:
-        config.MODE = 0
-        config.MODEL = args.model if args.model is not None else 0
+    if mode == 1:
+        config.MODE = 1
+        config.MODEL = args.model if args.model is not None else 1
 
     # test mode
-    elif mode == 1:
-        config.MODE = 1
-        config.MODEL = args.model if args.model is not None else 2
+    elif mode == 2:
+        config.MODE = 2
+        config.MODEL = args.model if args.model is not None else 3
         config.INPUT_SIZE = 0
 
         if args.input is not None:
@@ -113,9 +113,9 @@ def load_config(mode=None):
             config.RESULTS = args.output
 
     # eval mode
-    elif mode == 2:
-        config.MODE = 2
-        config.MODEL = args.model if args.model is not None else 2
+    elif mode == 3:
+        config.MODE = 3
+        config.MODEL = args.model if args.model is not None else 3
 
     return config
 

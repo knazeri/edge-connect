@@ -30,8 +30,8 @@ class Dataset(torch.utils.data.Dataset):
 
         # in test mode, there's a one-to-one relationship between mask and image
         # masks are loaded non random
-        if config.MODE == 1:
-            self.mask = 5
+        if config.MODE == 2:
+            self.mask = 6
 
     def __len__(self):
         return len(self.data)
@@ -86,7 +86,7 @@ class Dataset(torch.utils.data.Dataset):
         mask = None if self.training else (1 - mask / 255).astype(np.bool)
 
         # canny 
-        if self.edge == 0:
+        if self.edge == 1:
             # no edge
             if sigma == -1:
                 return np.zeros(img.shape).astype(np.float)
@@ -114,24 +114,24 @@ class Dataset(torch.utils.data.Dataset):
         mask_type = self.mask
 
         # external + random block
-        if mask_type == 3:
-            mask_type = 0 if np.random.binomial(1, 0.5) == 1 else 2
+        if mask_type == 4:
+            mask_type = 1 if np.random.binomial(1, 0.5) == 1 else 3
 
         # external + random block + half
-        elif mask_type == 4:
-            mask_type = np.random.randint(0, 3)
+        elif mask_type == 5:
+            mask_type = np.random.randint(1, 4)
 
         # random block
-        if mask_type == 0:
+        if mask_type == 1:
             return create_mask(imgw, imgh, imgw // 2, imgh // 2)
 
         # half
-        if mask_type == 1:
+        if mask_type == 2:
             # randomly choose right or left
             return create_mask(imgw, imgh, imgw // 2, imgh, 0 if random.random() < 0.5 else imgw // 2, 0)
 
         # external
-        if mask_type == 2:
+        if mask_type == 3:
             mask_index = random.randint(0, len(self.mask_data) - 1)
             mask = imread(self.mask_data[mask_index])
             mask = self.resize(mask, imgh, imgw)
@@ -139,7 +139,7 @@ class Dataset(torch.utils.data.Dataset):
             return mask
 
         # test mode: load mask non random
-        if mask_type == 5:
+        if mask_type == 6:
             mask = imread(self.mask_data[index])
             mask = self.resize(mask, imgh, imgw)
             mask = (mask > 0).astype(np.uint8) * 255
