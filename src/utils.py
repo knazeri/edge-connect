@@ -34,7 +34,7 @@ def stitch_images(inputs, *outputs, img_per_row=2):
         yoffset = int(ix / img_per_row) * height
 
         for cat in range(len(images)):
-            im = np.array(images[cat][ix]).astype(np.uint8).squeeze()
+            im = np.array((images[cat][ix]).cpu()).astype(np.uint8).squeeze()
             im = Image.fromarray(im)
             img.paste(im, (xoffset + cat * width, yoffset))
 
