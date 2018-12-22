@@ -58,7 +58,7 @@ Convergence of the model differs from dataset to dataset. For example Places2 da
 ### Test
 To test the model, create a `config.yaml` file similar to the [example config file](https://github.com/knazeri/edge-connect/blob/master/config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
 
-You can test the model on all three stages: 1) edge model, 2) inpaint model and 3) joint model. To test the model:
+You can test the model on all three stages: 1) edge model, 2) inpaint model and 3) joint model. In each case, you need to provide an input image (image with a mask) and a grayscale mask file. Please make sure that the mask file covers the entire mask region in the input image. To test the model:
 ```bash
 python test.py \
   --model [stage] \
@@ -67,6 +67,16 @@ python test.py \
   --mask [path to masks directory or mask file] \
   --output [path to the output directory]
 ```
+
+We provide some test examples under `./examples` directory. Please download the [pre-trained models](#getting-started) and run:
+```bash
+python test.py \
+  --checkpoints ./checkpoints/places2 
+  --input ./examples/places2/images 
+  --mask ./examples/places2/mask
+  --output ./checkpoints/results
+```
+This script will inpaint all images in `./examples/places2/images` using their corresponding masks in `./examples/places2/mask` directory and saves the results in `./checkpoints/results` directory. By default `test.py` script is run on stage 3 (`--model=3`).
 
 ### Model Configuration
 #### General Model Configurations
