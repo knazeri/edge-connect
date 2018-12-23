@@ -56,7 +56,7 @@ Convergence of the model differs from dataset to dataset. For example Places2 da
 
 
 ### Testing
-To test the model, create a `config.yaml` file similar to the [example config file](https://github.com/knazeri/edge-connect/blob/master/config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
+To test the model, create a `config.yaml` file similar to the [example config file](config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
 
 You can test the model on all three stages: 1) edge model, 2) inpaint model and 3) joint model. In each case, you need to provide an input image (image with a mask) and a grayscale mask file. Please make sure that the mask file covers the entire mask region in the input image. To test the model:
 ```bash
@@ -85,7 +85,7 @@ To evaluate the model, you need to first run the model in [test mode](#testing) 
 python ./scripts/metrics.py --data-path [path to validation set] --output-path [path to model output]
 ```
 
-To measure the Fréchet Inception Distance (FID score) run `scripts/fid_score.py`. We utilize the PyTorch implementation of FID [from here](https://github.com/mseitzer/pytorch-fid) which uses the pretrained weights from PyTorch's Inception model.
+To measure the Fréchet Inception Distance (FID score) run [`./scripts/fid_score.py`](scripts/fid_score.py). We utilize the PyTorch implementation of FID [from here](https://github.com/mseitzer/pytorch-fid) which uses the pretrained weights from PyTorch's Inception model.
 
 ```bash
 python ./scripts/fid_score.py --path [path to validation, path to model output] --gpu [GPU id to use]
