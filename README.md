@@ -23,7 +23,7 @@ pip install -r requirements.txt
 ## Datasets
 We use [Places2](http://places2.csail.mit.edu), [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) and [Paris Street-View](https://github.com/pathak22/context-encoder) datasets. To train a model on the full dataset, download datasets from official websites. Our model is trained on the irregular mask dataset provided by [Liu et al.](https://arxiv.org/abs/1804.07723). You can download publically available train/test mask dataset from [their website](http://masc.cs.gmu.edu/wiki/partialconv).
 
-After downloading, run `scripts/flist.py` to generate train, test and validation set file lists. For example, to generate the training set file list on Places2 dataset run:
+After downloading, run [`scripts/flist.py`](scripts/flist.py) to generate train, test and validation set file lists. For example, to generate the training set file list on Places2 dataset run:
 ```bash
 mkdir datasets
 python ./scripts/flist.py --path path_to_places2_traininit_set --output ./datasets/places_train.flist
@@ -55,7 +55,7 @@ python train.py --model 1 --checkpoints ./checkpoints/places2
 Convergence of the model differs from dataset to dataset. For example Places2 dataset converges in one of two epochs, while smaller datasets like CelebA require almost 40 epochs to converge. You can set the number of training iterations by changing `MAX_ITERS` value in the configuration file.
 
 
-### Test
+### Testing
 To test the model, create a `config.yaml` file similar to the [example config file](https://github.com/knazeri/edge-connect/blob/master/config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
 
 You can test the model on all three stages: 1) edge model, 2) inpaint model and 3) joint model. In each case, you need to provide an input image (image with a mask) and a grayscale mask file. Please make sure that the mask file covers the entire mask region in the input image. To test the model:
@@ -77,6 +77,13 @@ python test.py \
   --output ./checkpoints/results
 ```
 This script will inpaint all images in `./examples/places2/images` using their corresponding masks in `./examples/places2/mask` directory and saves the results in `./checkpoints/results` directory. By default `test.py` script is run on stage 3 (`--model=3`).
+
+### Evaluating
+To evaluate the model, you need to run the model in [test mode](#testing) against your validartion set and save the results on disk. We provide a utility [`./scripts/metrics.py`](https://github.com/knazeri/edge-connect/blob/master/scripts/metrics.py) to evaluate the model using PSNR, SSIM and Mean Absolute Error. To evaluate the model run:
+
+```bash
+python ./scripts/metrics.py --data-path [path to validation set] --output-path [path to model output]
+```
 
 ### Model Configuration
 #### General Model Configurations
