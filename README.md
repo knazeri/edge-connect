@@ -39,7 +39,7 @@ Alternatively, you can run the following script to automatically download the pr
 bash ./scripts/download_model.sh
 ```
 
-### Training
+### 1) Training
 To train the model, create a `config.yaml` file similar to the [example config file](https://github.com/knazeri/edge-connect/blob/master/config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
 
 EdgeConnect is trained in three stages: 1) training the edge model, 2) training the inpaint model and 3) training the joint model. To train the model:
@@ -55,7 +55,7 @@ python train.py --model 1 --checkpoints ./checkpoints/places2
 Convergence of the model differs from dataset to dataset. For example Places2 dataset converges in one of two epochs, while smaller datasets like CelebA require almost 40 epochs to converge. You can set the number of training iterations by changing `MAX_ITERS` value in the configuration file.
 
 
-### Testing
+### 2) Testing
 To test the model, create a `config.yaml` file similar to the [example config file](config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
 
 You can test the model on all three stages: 1) edge model, 2) inpaint model and 3) joint model. In each case, you need to provide an input image (image with a mask) and a grayscale mask file. Please make sure that the mask file covers the entire mask region in the input image. To test the model:
@@ -78,7 +78,7 @@ python test.py \
 ```
 This script will inpaint all images in `./examples/places2/images` using their corresponding masks in `./examples/places2/mask` directory and saves the results in `./checkpoints/results` directory. By default `test.py` script is run on stage 3 (`--model=3`).
 
-### Evaluating
+### 3) Evaluating
 To evaluate the model, you need to first run the model in [test mode](#testing) against your validartion set and save the results on disk. We provide a utility [`./scripts/metrics.py`](scripts/metrics.py) to evaluate the model using PSNR, SSIM and Mean Absolute Error:
 
 ```bash
@@ -92,9 +92,12 @@ python ./scripts/fid_score.py --path [path to validation, path to model output] 
 ```
 
 ### Model Configuration
+
+The model configuration is stored in a [`config.yaml`](config.yml.example) file under your checkpoints directory. The following tables provide the documentation for all the options available in the configuration file:
+
 #### General Model Configurations
 
-Key             | Description
+Option          | Description
 ----------------| -----------
 MODE            | 1: train, 2: test, 3: eval
 MODEL           | 1: edge model, 2: inpaint model, 3: edge-inpaint model, 4: joint model
@@ -107,7 +110,7 @@ DEBUG           | 0: no debug, 1: debugging mode
 
 #### Loading Train, Test and Validation Sets Configurations
 
-Key             | Description
+Option          | Description
 ----------------| -----------
 TRAIN_FLIST     | text file containing training set files list
 VAL_FLIST       | text file containing validation set files list
@@ -121,7 +124,7 @@ TEST_MASK_FLIST | text file containing test set masks files list (only with MASK
 
 #### Training Mode Configurations
 
-Key                    |Default| Description
+Option                 |Default| Description
 -----------------------|-------|------------
 LR                     | 0.0001| learning rate
 D2G_LR                 | 0.1   | discriminator/generator learning rate ratio
