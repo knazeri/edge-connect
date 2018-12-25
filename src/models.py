@@ -29,7 +29,7 @@ class BaseModel(nn.Module):
 
         # load discriminator only when training
         if self.config.MODE == 1 and os.path.exists(self.dis_weights_path):
-            print('Loading discriminator model...')
+            print('Loading %s discriminator model...' % self.name)
             data = torch.load(self.dis_weights_path)
             self.discriminator.load_state_dict(data['discriminator'])
 

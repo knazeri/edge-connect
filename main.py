@@ -6,7 +6,7 @@ import torch
 import argparse
 from shutil import copyfile
 from src.config import Config
-from src.inpainting_model import EdgeInpaintingModel
+from src.edge_connect import EdgeConnect
 
 
 def main(mode=None):
@@ -36,7 +36,7 @@ def main(mode=None):
 
 
     # build the model and initialize
-    model = EdgeInpaintingModel(config)
+    model = EdgeConnect(config)
     model.load()
 
 

@@ -9,7 +9,7 @@ from .utils import Progbar, create_dir, stitch_images, imsave
 from .metrics import PSNR, EdgeAccuracy
 
 
-class EdgeInpaintingModel():
+class EdgeConnect():
     def __init__(self, config):
         self.config = config
 
