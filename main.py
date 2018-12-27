@@ -35,6 +35,10 @@ def main(mode=None):
     random.seed(config.SEED)
 
 
+    # enable the cudnn auto-tuner for hardware.
+    torch.backends.cudnn.benchmark = True
+
+
     # build the model and initialize
     model = EdgeConnect(config)
     model.load()
@@ -65,7 +69,7 @@ def load_config(mode=None):
     """
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--path', '--checkpoints', type=str, default='./checkpoints',  help='model checkpoints path (default: ./checkpoints)')
+    parser.add_argument('--path', '--checkpoints', type=str, default='./checkpoints', help='model checkpoints path (default: ./checkpoints)')
     parser.add_argument('--model', type=int, help='0: edge model, 1: inpaint model, 2: edge-inpaint model, 3: joint model')
 
     # test mode
