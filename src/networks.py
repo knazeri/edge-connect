@@ -28,7 +28,7 @@ class BaseNetwork(nn.Module):
                 if hasattr(m, 'bias') and m.bias is not None:
                     nn.init.constant_(m.bias.data, 0.0)
 
-            elif classname.find('BatchNorm2d') != -1 or classname.find('InstanceNorm2d') != -1:
+            elif classname.find('BatchNorm2d') != -1:
                 nn.init.normal_(m.weight.data, 1.0, gain)
                 nn.init.constant_(m.bias.data, 0.0)
 
