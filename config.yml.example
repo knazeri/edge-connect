@@ -6,6 +6,7 @@ NMS: 1              # 0: no non-max-suppression, 1: applies non-max-suppression 
 SEED: 10            # random seed
 GPU: [0]            # list of gpu ids
 DEBUG: 0            # turns on debugging mode
+VERBOSE: 0          # turns on verbose mode in the output console
 
 TRAIN_FLIST: ./datasets/places2_train.flist
 VAL_FLIST: ./datasets/places2_val.flist

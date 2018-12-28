@@ -185,7 +185,7 @@ class EdgeConnect():
                     ("iter", iteration),
                 ] + logs
 
-                progbar.add(len(images), values=logs)
+                progbar.add(len(images), values=logs if self.config.VERBOSE else [x for x in logs if not x[0].startswith('l_')])
 
                 # log model at checkpoints
                 if self.config.LOG_INTERVAL and iteration % self.config.LOG_INTERVAL == 0:

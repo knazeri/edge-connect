@@ -46,7 +46,8 @@ def main(mode=None):
 
     # model training
     if config.MODE == 1:
-        config.print()
+        if config.VERBOSE:
+            config.print()
         print('\nstart training...\n')
         model.train()
 

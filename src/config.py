@@ -35,6 +35,7 @@ DEFAULT_CONFIG = {
     'SEED': 10,                     # random seed
     'GPU': [0],                     # list of gpu ids
     'DEBUG': 0,                     # turns on debugging mode
+    'VERBOSE': 0,                   # turns on verbose mode in the output console
 
     'LR': 0.0001,                   # learning rate
     'D2G_LR': 0.1,                  # discriminator/generator learning rate ratio
