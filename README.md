@@ -107,6 +107,7 @@ NMS             | 0: no non-max-suppression, 1: non-max-suppression on the exter
 SEED            | random number generator seed
 GPU             | list of gpu ids, comma separated list e.g. [0,1]
 DEBUG           | 0: no debug, 1: debugging mode
+VERBOSE         | 0: no verbose, 1: output detailed statistics in the output console
 
 #### Loading Train, Test and Validation Sets Configurations
 
