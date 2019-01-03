@@ -8,7 +8,7 @@ We develop a new approach for image inpainting that does a better job of reprodu
 
 ## Prerequisites
 - Python 3
-- PyTorch
+- PyTorch 1.0
 - NVIDIA GPU + CUDA cuDNN
 
 ## Installation
