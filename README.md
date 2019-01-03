@@ -1,4 +1,7 @@
 ## EdgeConnect: Generative Image Inpainting with Adversarial Edge Learning
+[ArXiv](https://arxiv.org/abs/1901.00212) | [BibTex](#citation)
+### Introduction:
+We develop a new approach for image inpainting that does a better job of reproducing filled regions exhibiting fine details inspired by our understanding of how artists work: *lines first, color next*. We propose a two-stage adversarial model EdgeConnect that comprises of an edge generator followed by an image completion network. The edge generator hallucinates edges of the missing region (both regular and irregular) of the image, and the image completion network fills in the missing regions using hallucinated edges as a priori. Detailed description of the system can be found in our [paper](https://arxiv.org/abs/1901.00212).
 <p align='center'>  
   <img src='https://user-images.githubusercontent.com/1743048/50255605-916db100-03c0-11e9-8baa-6af87c2d86a9.png' width='870'/>
 </p>
