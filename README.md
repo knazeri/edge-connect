@@ -3,8 +3,9 @@
 ### Introduction:
 We develop a new approach for image inpainting that does a better job of reproducing filled regions exhibiting fine details inspired by our understanding of how artists work: *lines first, color next*. We propose a two-stage adversarial model EdgeConnect that comprises of an edge generator followed by an image completion network. The edge generator hallucinates edges of the missing region (both regular and irregular) of the image, and the image completion network fills in the missing regions using hallucinated edges as a priori. Detailed description of the system can be found in our [paper](https://arxiv.org/abs/1901.00212).
 <p align='center'>  
-  <img src='https://user-images.githubusercontent.com/1743048/50255605-916db100-03c0-11e9-8baa-6af87c2d86a9.png' width='870'/>
+  <img src='https://user-images.githubusercontent.com/1743048/50673917-aac15080-0faf-11e9-9100-ef10864087c8.png' width='870'/>
 </p>
+**(a)** Input images with missing regions. The missing regions are depicted in white. **(b)** Computed edge masks. Edges drawn in black are computed (for the available regions) using Canny edge detector; whereas edges shown in blue are hallucinated by the edge generator network. **(c)** Image inpainting results of the proposed approach.
 
 ## Prerequisites
 - Python 3
