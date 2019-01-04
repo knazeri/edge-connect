@@ -5,7 +5,7 @@ We develop a new approach for image inpainting that does a better job of reprodu
 <p align='center'>  
   <img src='https://user-images.githubusercontent.com/1743048/50673917-aac15080-0faf-11e9-9100-ef10864087c8.png' width='870'/>
 </p>
-**(a)** Input images with missing regions. The missing regions are depicted in white. **(b)** Computed edge masks. Edges drawn in black are computed (for the available regions) using Canny edge detector; whereas edges shown in blue are hallucinated by the edge generator network. **(c)** Image inpainting results of the proposed approach.
+(a) Input images with missing regions. The missing regions are depicted in white. (b) Computed edge masks. Edges drawn in black are computed (for the available regions) using Canny edge detector; whereas edges shown in blue are hallucinated by the edge generator network. (c) Image inpainting results of the proposed approach.
 
 ## Prerequisites
 - Python 3
