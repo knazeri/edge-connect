@@ -73,7 +73,7 @@ def load_config(mode=None):
     parser.add_argument('--model', type=int, help='0: edge model, 1: inpaint model, 2: edge-inpaint model, 3: joint model')
 
     # test mode
-    if mode == 1:
+    if mode == 2:
         parser.add_argument('--input', type=str, help='path to the input images directory or an input image')
         parser.add_argument('--mask', type=str, help='path to the masks directory or a mask file')
         parser.add_argument('--edge', type=str, help='path to the edges directory or an edge file')
