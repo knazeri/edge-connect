@@ -172,7 +172,7 @@ class EdgeConnect():
 
                     # backward
                     self.inpaint_model.backward(i_gen_loss, i_dis_loss)
-                    self.edge_model.backward()
+                    self.edge_model.backward(e_gen_loss, e_dis_loss)
                     iteration = self.inpaint_model.iteration
 
 
