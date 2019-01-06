@@ -50,7 +50,7 @@ def imshow(img, title=''):
 
 
 def imsave(img, path):
-    im = Image.fromarray(np.array(img).astype(np.uint8).squeeze())
+    im = Image.fromarray(img.cpu().numpy().astype(np.uint8).squeeze())
     im.save(path)
 
 
