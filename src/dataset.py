@@ -141,7 +141,8 @@ class Dataset(torch.utils.data.Dataset):
         # test mode: load mask non random
         if mask_type == 6:
             mask = imread(self.mask_data[index])
-            mask = self.resize(mask, imgh, imgw)
+            mask = self.resize(mask, imgh, imgw, centerCrop=False)
+            mask = rgb2gray(mask)
             mask = (mask > 0).astype(np.uint8) * 255
             return mask
 
@@ -150,10 +151,10 @@ class Dataset(torch.utils.data.Dataset):
         img_t = F.to_tensor(img).float()
         return img_t
 
-    def resize(self, img, height, width):
+    def resize(self, img, height, width, centerCrop=True):
         imgh, imgw = img.shape[0:2]
 
-        if imgh != imgw:
+        if centerCrop and imgh != imgw:
             # center crop
             side = np.minimum(imgh, imgw)
             j = (imgh - side) // 2
