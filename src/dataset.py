@@ -172,7 +172,9 @@ class Dataset(torch.utils.data.Dataset):
         # flist: image file path, image directory path, text file flist path
         if isinstance(flist, str):
             if os.path.isdir(flist):
-                return list(glob.glob(flist + '/*.jpg')) + list(glob.glob(flist + '/*.png'))
+                flist = list(glob.glob(flist + '/*.jpg')) + list(glob.glob(flist + '/*.png'))
+                flist.sort()
+                return flist
 
             if os.path.isfile(flist):
                 try:
