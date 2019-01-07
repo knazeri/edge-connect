@@ -30,7 +30,7 @@ We use [Places2](http://places2.csail.mit.edu), [CelebA](http://mmlab.ie.cuhk.ed
 After downloading, run [`scripts/flist.py`](scripts/flist.py) to generate train, test and validation set file lists. For example, to generate the training set file list on Places2 dataset run:
 ```bash
 mkdir datasets
-python ./scripts/flist.py --path path_to_places2_traininit_set --output ./datasets/places_train.flist
+python ./scripts/flist.py --path path_to_places2_train_set --output ./datasets/places_train.flist
 ```
 
 ## Getting Started
