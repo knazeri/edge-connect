@@ -96,7 +96,8 @@ def load_config(mode=None):
     # train mode
     if mode == 1:
         config.MODE = 1
-        config.MODEL = args.model if args.model is not None else 1
+        if args.model:
+            config.MODEL = args.model 
 
     # test mode
     elif mode == 2:
