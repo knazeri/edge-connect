@@ -19,9 +19,14 @@ def main(mode=None):
     config = load_config(mode)
 
 
-    # init cuda environment
-    os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(str(e) for e in config.GPU)
-    config.DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # init environment
+    if torch.cuda.is_available():
+        os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(str(e) for e in config.GPU)
+        config.DEVICE = torch.device("cuda")
+        torch.backends.cudnn.benchmark = True   # cudnn auto-tuner
+    else:
+        config.DEVICE = torch.device("cpu")
+
 
 
     # set cv2 running threads to 1 (prevents deadlocks with pytorch dataloader)
@@ -34,9 +39,6 @@ def main(mode=None):
     np.random.seed(config.SEED)
     random.seed(config.SEED)
 
-
-    # enable the cudnn auto-tuner for hardware.
-    torch.backends.cudnn.benchmark = True
 
 
     # build the model and initialize

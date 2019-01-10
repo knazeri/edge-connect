@@ -23,14 +23,24 @@ class BaseModel(nn.Module):
     def load(self):
         if os.path.exists(self.gen_weights_path):
             print('Loading %s generator...' % self.name)
-            data = torch.load(self.gen_weights_path)
+            
+            if torch.cuda.is_available():
+                data = torch.load(self.gen_weights_path)
+            else: 
+                data = torch.load(self.gen_weights_path, map_location=lambda storage, loc: storage)
+
             self.generator.load_state_dict(data['generator'])
             self.iteration = data['iteration']
 
         # load discriminator only when training
         if self.config.MODE == 1 and os.path.exists(self.dis_weights_path):
             print('Loading %s discriminator...' % self.name)
-            data = torch.load(self.dis_weights_path)
+
+            if torch.cuda.is_available():
+                data = torch.load(self.dis_weights_path)
+            else:
+                data = torch.load(self.dis_weights_path, map_location=lambda storage, loc: storage)
+
             self.discriminator.load_state_dict(data['discriminator'])
 
     def save(self):
