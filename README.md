@@ -25,7 +25,7 @@ pip install -r requirements.txt
 ```
 
 ## Datasets
-### Images
+### 1) Images
 We use [Places2](http://places2.csail.mit.edu), [CelebA](http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html) and [Paris Street-View](https://github.com/pathak22/context-encoder) datasets. To train a model on the full dataset, download datasets from official websites. 
 
 After downloading, run [`scripts/flist.py`](scripts/flist.py) to generate train, test and validation set file lists. For example, to generate the training set file list on Places2 dataset run:
@@ -34,7 +34,7 @@ mkdir datasets
 python ./scripts/flist.py --path path_to_places2_train_set --output ./datasets/places_train.flist
 ```
 
-### Irregular Masks
+### 2) Irregular Masks
 Our model is trained on the irregular mask dataset provided by [Liu et al.](https://arxiv.org/abs/1804.07723). You can download publically available Irregular Mask Dataset from [their website](http://masc.cs.gmu.edu/wiki/partialconv).
 
 Alternatively, you can download [Quick Draw Irregular Mask Dataset](https://github.com/karfly/qd-imd) by Karim Iskakov which is combination of 50 million strokes drawn by human hand.
@@ -65,7 +65,6 @@ python train.py --model 1 --checkpoints ./checkpoints/places2
 ```
 
 Convergence of the model differs from dataset to dataset. For example Places2 dataset converges in one of two epochs, while smaller datasets like CelebA require almost 40 epochs to converge. You can set the number of training iterations by changing `MAX_ITERS` value in the configuration file.
-
 
 ### 2) Testing
 To test the model, create a `config.yaml` file similar to the [example config file](config.yml.example) and copy it under your checkpoints directory. Read the [configuration](#model-configuration) guide for more information on model configuration.
@@ -102,6 +101,9 @@ To measure the Fréchet Inception Distance (FID score) run [`./scripts/fid_score
 ```bash
 python ./scripts/fid_score.py --path [path to validation, path to model output] --gpu [GPU id to use]
 ```
+
+### Alternative Edge Detection
+By default, we use Canny edge detector to extract edge information from the input images. If you want to train the model with an external edge detection ([Holistically-Nested Edge Detection](https://github.com/s9xie/hed) for example), you need to generate edge maps for the entire training/test sets as a pre-processing and their corresponding file lists using [`scripts/flist.py`](scripts/flist.py) as explained above. Please make sure the file names and directory structure match your training/test sets. You can switch to external edge detection by specifying `EDGE=2` in the config file.
 
 ### Model Configuration
 
