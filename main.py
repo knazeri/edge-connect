@@ -19,9 +19,12 @@ def main(mode=None):
     config = load_config(mode)
 
 
-    # init environment
+    # cuda visble devices
+    os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(str(e) for e in config.GPU)
+
+
+    # init device
     if torch.cuda.is_available():
-        os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(str(e) for e in config.GPU)
         config.DEVICE = torch.device("cuda")
         torch.backends.cudnn.benchmark = True   # cudnn auto-tuner
     else:
