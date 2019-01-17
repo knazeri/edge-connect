@@ -9,7 +9,7 @@ from torch.utils.data import DataLoader
 from PIL import Image
 from scipy.misc import imread
 from skimage.feature import canny
-from skimage.color import rgb2gray
+from skimage.color import rgb2gray, gray2rgb
 from .utils import create_mask
 
 
@@ -55,6 +55,10 @@ class Dataset(torch.utils.data.Dataset):
         
         # load image
         img = imread(self.data[index])
+
+        # gray to rgb
+        if len(img.shape) < 3:
+            img = gray2rgb(img)
         
         # resize/crop if needed
         if size != 0:
