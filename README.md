@@ -90,7 +90,7 @@ python test.py \
 This script will inpaint all images in `./examples/places2/images` using their corresponding masks in `./examples/places2/mask` directory and saves the results in `./checkpoints/results` directory. By default `test.py` script is run on stage 3 (`--model=3`).
 
 ### 3) Evaluating
-To evaluate the model, you need to first run the model in [test mode](#testing) against your validartion set and save the results on disk. We provide a utility [`./scripts/metrics.py`](scripts/metrics.py) to evaluate the model using PSNR, SSIM and Mean Absolute Error:
+To evaluate the model, you need to first run the model in [test mode](#testing) against your validation set and save the results on disk. We provide a utility [`./scripts/metrics.py`](scripts/metrics.py) to evaluate the model using PSNR, SSIM and Mean Absolute Error:
 
 ```bash
 python ./scripts/metrics.py --data-path [path to validation set] --output-path [path to model output]
