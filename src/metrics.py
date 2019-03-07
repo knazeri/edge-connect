@@ -18,7 +18,7 @@ class EdgeAccuracy(nn.Module):
         selected = torch.sum(outputs.float())
 
         if relevant == 0 and selected == 0:
-            return 1, 1
+            return torch.tensor(1), torch.tensor(1)
 
         true_positive = ((outputs == labels) * labels).float()
         recall = torch.sum(true_positive) / (relevant + 1e-8)
@@ -41,6 +41,6 @@ class PSNR(nn.Module):
         mse = torch.mean((a.float() - b.float()) ** 2)
     
         if mse == 0:
-            return 0
+            return torch.tensor(0)
 
         return self.max_val - 10 * torch.log(mse) / self.base10
