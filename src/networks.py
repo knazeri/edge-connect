@@ -7,7 +7,7 @@ def output_align(input, output):
     In testing, sometimes output is several pixels less than irregular-size input,
     here is to fill them
     """
-    if output.size() != input.size():
+    if output.size()[-2:] != input.size()[-2:]:
         diff_width = input.size(-1) - output.size(-1)
         diff_height = input.size(-2) - output.size(-2)
         m = nn.ReplicationPad2d((0, diff_width, 0, diff_height))
