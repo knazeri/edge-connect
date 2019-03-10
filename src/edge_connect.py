@@ -341,6 +341,9 @@ class EdgeConnect():
         print('\nEnd test....')
 
     def sample(self, it=None):
+        if len(self.val_dataset) == 0:
+            return 
+            
         self.edge_model.eval()
         self.inpaint_model.eval()
 
