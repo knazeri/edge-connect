@@ -67,7 +67,7 @@ def main(mode=None):
 
 
 def load_config(mode=None):
-    r"""loads model config 
+    r"""loads model config
 
     Args:
         mode (int): 1: train, 2: test, 3: eval, reads from config file if not specified
@@ -102,7 +102,7 @@ def load_config(mode=None):
     if mode == 1:
         config.MODE = 1
         if args.model:
-            config.MODEL = args.model 
+            config.MODEL = args.model
 
     # test mode
     elif mode == 2:
