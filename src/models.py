@@ -23,7 +23,7 @@ class BaseModel(nn.Module):
 
             if torch.cuda.is_available():
                 data = torch.load(self.gen_weights_path)
-            else: 
+            else:
                 data = torch.load(self.gen_weights_path, map_location=lambda storage, loc: storage)
 
             self.generator.load_state_dict(data['generator'])
@@ -117,7 +117,7 @@ class EdgeModel(BaseModel):
 
 
         # generator feature matching loss
-        gen_fm_loss = 0 
+        gen_fm_loss = 0
         for i in range(len(dis_real_feat)):
             gen_fm_loss += self.l1_loss(gen_fake_feat[i], dis_real_feat[i].detach())
         gen_fm_loss = gen_fm_loss * self.config.FM_LOSS_WEIGHT

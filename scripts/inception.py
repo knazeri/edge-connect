@@ -108,11 +108,11 @@ class InceptionV3(nn.Module):
         Parameters
         ----------
         inp : torch.autograd.Variable
-            Input tensor of shape Bx3xHxW. Values are expected to be in 
+            Input tensor of shape Bx3xHxW. Values are expected to be in
             range (0, 1)
         Returns
         -------
-        List of torch.autograd.Variable, corresponding to the selected output 
+        List of torch.autograd.Variable, corresponding to the selected output
         block, sorted ascending by index
         """
         outp = []
