@@ -112,10 +112,10 @@ def calculate_frechet_distance(mu1, sigma1, mu2, sigma2, eps=1e-6):
     -- mu1   : Numpy array containing the activations of a layer of the
                inception net (like returned by the function 'get_predictions')
                for generated samples.
-    -- mu2   : The sample mean over activations, precalculated on an 
+    -- mu2   : The sample mean over activations, precalculated on an
                representive data set.
     -- sigma1: The covariance matrix over activations for generated samples.
-    -- sigma2: The covariance matrix over activations, precalculated on an 
+    -- sigma2: The covariance matrix over activations, precalculated on an
                representive data set.
     Returns:
     --   : The Frechet Distance.
