@@ -388,7 +388,7 @@ class EdgeConnect():
             self.postprocess(edges),
             self.postprocess(outputs),
             self.postprocess(outputs_merged), 
-            img_per_row = image_per_row
+            img_per_row=image_per_row
         )
 
 
