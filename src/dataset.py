@@ -52,24 +52,24 @@ class Dataset(torch.utils.data.Dataset):
     def load_item(self, index):
 
         size = self.input_size
-        
+
         # load image
         img = imread(self.data[index])
 
         # gray to rgb
         if len(img.shape) < 3:
             img = gray2rgb(img)
-        
+
         # resize/crop if needed
         if size != 0:
             img = self.resize(img, size, size)
 
         # create grayscale image
         img_gray = rgb2gray(img)
-        
+
         # load mask
         mask = self.load_mask(img, index)
-        
+
         # load edge
         edge = self.load_edge(img_gray, index, mask)
 
@@ -94,11 +94,11 @@ class Dataset(torch.utils.data.Dataset):
             # no edge
             if sigma == -1:
                 return np.zeros(img.shape).astype(np.float)
-            
+
             # random sigma
             if sigma == 0:
                 sigma = random.randint(1, 4)
-                
+
             return canny(img, sigma=sigma, mask=mask).astype(np.float)
 
         # external
@@ -185,7 +185,7 @@ class Dataset(torch.utils.data.Dataset):
                     return np.genfromtxt(flist, dtype=np.str, encoding='utf-8')
                 except:
                     return [flist]
-        
+
         return []
 
     def create_iterator(self, batch_size):
