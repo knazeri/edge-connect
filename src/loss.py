@@ -151,7 +151,7 @@ class VGG19(torch.nn.Module):
             self.relu3_2.add_module(str(x), features[x])
 
         for x in range(14, 16):
-            self.relu3_2.add_module(str(x), features[x])
+            self.relu3_3.add_module(str(x), features[x])
 
         for x in range(16, 18):
             self.relu3_4.add_module(str(x), features[x])
