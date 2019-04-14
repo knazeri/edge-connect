@@ -39,7 +39,7 @@ class PSNR(nn.Module):
 
     def __call__(self, a, b):
         mse = torch.mean((a.float() - b.float()) ** 2)
-    
+
         if mse == 0:
             return torch.tensor(0)
 
