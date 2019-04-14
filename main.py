@@ -76,7 +76,7 @@ def load_config(mode=None):
     parser = argparse.ArgumentParser()
     parser.add_argument('--path', '--checkpoints', type=str, default='./checkpoints', help='model checkpoints path (default: ./checkpoints)')
     parser.add_argument('--model', type=int, choices=[1, 2, 3, 4], help='1: edge model, 2: inpaint model, 3: edge-inpaint model, 4: joint model')
-    
+
     # test mode
     if mode == 2:
         parser.add_argument('--input', type=str, help='path to the input images directory or an input image')
