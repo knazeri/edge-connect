@@ -7,7 +7,7 @@ class Config(dict):
             self._yaml = f.read()
             self._dict = yaml.load(self._yaml)
             self._dict['PATH'] = os.path.dirname(config_path)
- 
+
     def __getattr__(self, name):
         if self._dict.get(name) is not None:
             return self._dict[name]
