@@ -1,11 +1,8 @@
 import os
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
 from .networks import InpaintGenerator, EdgeGenerator, Discriminator
-from .dataset import Dataset
 from .loss import AdversarialLoss, PerceptualLoss, StyleLoss
 
 
