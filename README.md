@@ -148,7 +148,7 @@ BETA2                  | 0.9   | adam optimizer beta2
 BATCH_SIZE             | 8     | input batch size 
 INPUT_SIZE             | 256   | input image size for training. (0 for original size)
 SIGMA                  | 2     | standard deviation of the Gaussian filter used in Canny edge detector </br>(0: random, -1: no edge)
-MAX_ITERS              | 2e7   | maximum number of iterations to train the model
+MAX_ITERS              | 2e6   | maximum number of iterations to train the model
 EDGE_THRESHOLD         | 0.5   | edge detection threshold (0-1)
 L1_LOSS_WEIGHT         | 1     | l1 loss weight
 FM_LOSS_WEIGHT         | 10    | feature-matching loss weight
