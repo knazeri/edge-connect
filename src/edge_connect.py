@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import torch
-import torch.nn as nn
 from torch.utils.data import DataLoader
 from .dataset import Dataset
 from .models import EdgeModel, InpaintingModel
@@ -343,7 +342,7 @@ class EdgeConnect():
     def sample(self, it=None):
         # do not sample when validation set is empty
         if len(self.val_dataset) == 0:
-            return 
+            return
 
         self.edge_model.eval()
         self.inpaint_model.eval()
@@ -387,7 +386,7 @@ class EdgeConnect():
             self.postprocess(inputs),
             self.postprocess(edges),
             self.postprocess(outputs),
-            self.postprocess(outputs_merged), 
+            self.postprocess(outputs_merged),
             img_per_row = image_per_row
         )
 

@@ -1,11 +1,8 @@
 import os
-import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
 from .networks import InpaintGenerator, EdgeGenerator, Discriminator
-from .dataset import Dataset
 from .loss import AdversarialLoss, PerceptualLoss, StyleLoss
 
 
@@ -23,10 +20,10 @@ class BaseModel(nn.Module):
     def load(self):
         if os.path.exists(self.gen_weights_path):
             print('Loading %s generator...' % self.name)
-            
+
             if torch.cuda.is_available():
                 data = torch.load(self.gen_weights_path)
-            else: 
+            else:
                 data = torch.load(self.gen_weights_path, map_location=lambda storage, loc: storage)
 
             self.generator.load_state_dict(data['generator'])
@@ -63,7 +60,7 @@ class EdgeModel(BaseModel):
         # discriminator input: (grayscale(1) + edge(1))
         generator = EdgeGenerator(use_spectral_norm=True)
         discriminator = Discriminator(in_channels=2, use_sigmoid=config.GAN_LOSS != 'hinge')
-        if len(config.GPU)>1:
+        if len(config.GPU) > 1:
             generator = nn.DataParallel(generator, config.GPU)
             discriminator = nn.DataParallel(discriminator, config.GPU)
         l1_loss = nn.L1Loss()
@@ -120,7 +117,7 @@ class EdgeModel(BaseModel):
 
 
         # generator feature matching loss
-        gen_fm_loss = 0 
+        gen_fm_loss = 0
         for i in range(len(dis_real_feat)):
             gen_fm_loss += self.l1_loss(gen_fake_feat[i], dis_real_feat[i].detach())
         gen_fm_loss = gen_fm_loss * self.config.FM_LOSS_WEIGHT
@@ -143,7 +140,7 @@ class EdgeModel(BaseModel):
         outputs = self.generator(inputs)                                    # in: [grayscale(1) + edge(1) + mask(1)]
         return outputs
 
-    def backward(self, gen_loss = None, dis_loss = None):
+    def backward(self, gen_loss=None, dis_loss=None):
         if dis_loss is not None:
             dis_loss.backward()
         self.dis_optimizer.step()
@@ -255,7 +252,7 @@ class InpaintingModel(BaseModel):
         outputs = self.generator(inputs)                                    # in: [rgb(3) + edge(1)]
         return outputs
 
-    def backward(self, gen_loss = None, dis_loss = None):
+    def backward(self, gen_loss=None, dis_loss=None):
         dis_loss.backward()
         self.dis_optimizer.step()
 
