@@ -85,6 +85,10 @@ class EdgeConnect():
         max_iteration = int(float((self.config.MAX_ITERS)))
         total = len(self.train_dataset)
 
+        if total == 0:
+            print('No training data was provided! Check \'TRAIN_FLIST\' value in the configuration file.')
+            return
+
         while(keep_training):
             epoch += 1
             print('\n\nTraining epoch: %d' % epoch)
