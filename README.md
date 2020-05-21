@@ -170,7 +170,7 @@ Except where otherwise noted, this content is published under a [CC BY-NC](https
 
 
 ## Citation
-If you use this code for your research, please cite our paper <a href="https://arxiv.org/abs/1901.00212">EdgeConnect: Generative Image Inpainting with Adversarial Edge Learning</a>:
+If you use this code for your research, please cite our papers <a href="https://arxiv.org/abs/1901.00212">EdgeConnect: Generative Image Inpainting with Adversarial Edge Learning</a> or <a href="http://openaccess.thecvf.com/content_ICCVW_2019/html/AIM/Nazeri_EdgeConnect_Structure_Guided_Image_Inpainting_using_Edge_Prediction_ICCVW_2019_paper.html">EdgeConnect: Structure Guided Image Inpainting using Edge Prediction</a>:
 
 ```
 @inproceedings{nazeri2019edgeconnect,
@@ -178,5 +178,13 @@ If you use this code for your research, please cite our paper <a href="https://a
   author={Nazeri, Kamyar and Ng, Eric and Joseph, Tony and Qureshi, Faisal and Ebrahimi, Mehran},
   journal={arXiv preprint},
   year={2019},
+}
+
+@InProceedings{Nazeri_2019_ICCV,
+  title = {EdgeConnect: Structure Guided Image Inpainting using Edge Prediction},
+  author = {Nazeri, Kamyar and Ng, Eric and Joseph, Tony and Qureshi, Faisal and Ebrahimi, Mehran},
+  booktitle = {The IEEE International Conference on Computer Vision (ICCV) Workshops},
+  month = {Oct},
+  year = {2019}
 }
 ```
