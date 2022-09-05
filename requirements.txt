@@ -3,6 +3,6 @@ scipy ~= 1.0.1
 future ~= 0.16.0
 matplotlib ~= 2.2.2
 pillow >= 6.2.0
-opencv-python ~= 3.4.0
+opencv-python ~= 4.6.0
 scikit-image ~= 0.14.0
 pyaml
