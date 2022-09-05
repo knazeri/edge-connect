@@ -1,4 +1,4 @@
-numpy ~= 1.14.3
+numpy ~= 1.19
 scipy ~= 1.0.1
 future ~= 0.16.0
 matplotlib ~= 2.2.2
