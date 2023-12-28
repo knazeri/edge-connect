@@ -7,10 +7,12 @@ import numpy as np
 import torchvision.transforms.functional as F
 from torch.utils.data import DataLoader
 from PIL import Image
-from scipy.misc import imread
+from imageio import imread
+# from scipy.misc import imread
 from skimage.feature import canny
 from skimage.color import rgb2gray, gray2rgb
 from .utils import create_mask
+from skimage.transform import resize
 
 
 class Dataset(torch.utils.data.Dataset):
@@ -139,14 +141,14 @@ class Dataset(torch.utils.data.Dataset):
             mask_index = random.randint(0, len(self.mask_data) - 1)
             mask = imread(self.mask_data[mask_index])
             mask = self.resize(mask, imgh, imgw)
-            mask = (mask > 0).astype(np.uint8) * 255       # threshold due to interpolation
+            mask = (mask > 0).astype(np.uint8) * 255  # threshold due to interpolation
             return mask
 
         # test mode: load mask non random
         if mask_type == 6:
             mask = imread(self.mask_data[index])
             mask = self.resize(mask, imgh, imgw, centerCrop=False)
-            mask = rgb2gray(mask)
+            #mask = rgb2gray(mask)
             mask = (mask > 0).astype(np.uint8) * 255
             return mask
 
@@ -154,6 +156,21 @@ class Dataset(torch.utils.data.Dataset):
         img = Image.fromarray(img)
         img_t = F.to_tensor(img).float()
         return img_t
+
+    # def resize(self, img, height, width, centerCrop=True):
+    #     imgh, imgw = img.shape[0:2]
+    #
+    #     if centerCrop and imgh != imgw:
+    #         # center crop
+    #         side = np.minimum(imgh, imgw)
+    #         j = (imgh - side) // 2
+    #         i = (imgw - side) // 2
+    #         img = img[j:j + side, i:i + side, ...]
+    #
+    #     img = scipy.misc.imresize(img, [height, width], mode='F')
+    #     # img = resize(img, (height, width))
+    #
+    #     return img
 
     def resize(self, img, height, width, centerCrop=True):
         imgh, imgw = img.shape[0:2]
@@ -165,10 +182,16 @@ class Dataset(torch.utils.data.Dataset):
             i = (imgw - side) // 2
             img = img[j:j + side, i:i + side, ...]
 
-        img = scipy.misc.imresize(img, [height, width])
+        # Convert the NumPy array to a PIL Image
+        img_pil = Image.fromarray(img)
 
-        return img
+        # Resize using PIL
+        img_resized = img_pil.resize((width, height))
 
+        # Optionally convert back to NumPy array
+        img_resized = np.array(img_resized)
+
+        return img_resized
     def load_flist(self, flist):
         if isinstance(flist, list):
             return flist
