@@ -44,7 +44,7 @@ Please use [`scripts/flist.py`](scripts/flist.py) to generate train, test and va
 ## Getting Started
 Download the pre-trained models using the following links and copy them under `./checkpoints` directory.
 
-[Places2](https://drive.google.com/drive/folders/1KyXz4W4SAvfsGh3NJ7XgdOv5t46o-8aa) | [CelebA](https://drive.google.com/drive/folders/1nkLOhzWL-w2euo0U6amhz7HVzqNC5rqb) | [Paris-StreetView](https://drive.google.com/drive/folders/1cGwDaZqDcqYU7kDuEbMXa9TP3uDJRBR1)
+[Places2](https://drive.google.com/drive/folders/158ch9Psjop0mQEdeIp9DKjrYIGTDsZKN) | [CelebA](https://drive.google.com/drive/folders/13JgMA5sKMYgRwHBp4f7PBc5orNJ_Cv-p) | [Paris-StreetView](https://drive.google.com/drive/folders/1hMGVz6Ck3erpP3BRNzG90HNCJl85kveN)
 
 Alternatively, you can run the following script to automatically download the pre-trained models:
 ```bash
