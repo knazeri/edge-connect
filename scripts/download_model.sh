@@ -1,5 +1,5 @@
 DIR='./checkpoints'
-URL='https://drive.google.com/uc?export=download&id=1IrlFQGTpdQYdPeZIEgGUaSFpbYtNpekA'
+URL='https://drive.google.com/uc?export=download&id=1bXYYcFFbvTsoZUnaoePNEObPzfx1DkPV'
 
 echo "Downloading pre-trained models..."
 mkdir -p $DIR
